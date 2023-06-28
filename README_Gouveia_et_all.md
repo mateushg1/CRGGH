@@ -46,7 +46,7 @@ admixture reference.bed 2
 #### Use learned allele frequencies as (fixed) input to next step
 cp reference.2.P study.2.P.in
 #### Run projection ADMIXTURE with K=2
-admixture -P study.bed 2"
+admixture -P study.bed 2
 
 ## Association analysis accounting for local ancestry
 
