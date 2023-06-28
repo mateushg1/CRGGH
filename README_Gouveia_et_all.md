@@ -39,14 +39,14 @@ the study individuals on it:
 
 #### Verify the two datasets have the same set of SNPs
 
-diff -s reference.bim study.bim
+`diff -s reference.bim study.bim`
 
 #### Run unsupervised ADMIXTURE with K=2
-admixture reference.bed 2
+`admixture reference.bed 2`
 #### Use learned allele frequencies as (fixed) input to next step
-cp reference.2.P study.2.P.in
+`cp reference.2.P study.2.P.in`
 #### Run projection ADMIXTURE with K=2
-admixture -P study.bed 2
+`admixture -P study.bed 2`
 
 ## Association analysis accounting for local ancestry
 
@@ -61,25 +61,23 @@ admixture -P study.bed 2
 
 #### Transform PLINK 1 files to PLINK 2 format 
 
-plink2 --bfile < PLINK1 file name without extension (.bed/.bim/.fam) > --make-pgen -out < PLINK2 file name without extension (.pgen/.psam/.pvar) >
+`plink2 --bfile < PLINK1 file name without extension (.bed/.bim/.fam) > --make-pgen -out < PLINK2 file name without extension (.pgen/.psam/.pvar) >`
 
 
 #### Extract RFMix local ancestry dosages and create PLINK 2 local covariate files 
 
-python Extract_dosages_09092022.py -t < RFMIX probability calls with extension (.fb.tsv) > -a < Ancestry name in the header of RFMIX file> -P < PLINK2 file name with extension (.pvar) >
--o < output name >
+`python Extract_dosages_09092022.py -t < RFMIX probability calls with extension (.fb.tsv) > -a < Ancestry name in the header of RFMIX file> -P < PLINK2 file name with extension (.pvar) > -o < output name >`
 
 
 #### Compressing covar files (the local covariates can be very large!)
 
-for chr in {1..22}; do
+`for chr in {1..22}; do
 zstd chr${chr}_local.covar
-done
+done`
 
 #### Association analysis adjusting for covariates and local covariates (e.g., local ancestry)
 
-plink2 --pfile < PLINK2 file name without extension (.pgen/.pvar) > --glm omit-ref  --pheno < phenotype file with extension > / 
---covar < covariates files with extension > local-covar= < local covariate file with extension (.covar.zst) > local-psam= < local covariate file with extension (.psam) > local-pvar= < local covariate file with extension (.pvar) > --covar-variance-standardize -out < association output file > --threads 20
+`plink2 --pfile < PLINK2 file name without extension (.pgen/.pvar) > --glm omit-ref  --pheno < phenotype file with extension > --covar < covariates files with extension > local-covar= < local covariate file with extension (.covar.zst) > local-psam= < local covariate file with extension (.psam) > local-pvar= < local covariate file with extension (.pvar) > --covar-variance-standardize -out < association output file > --threads 20`
 
 
 
