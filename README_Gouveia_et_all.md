@@ -59,7 +59,7 @@ admixture -P study.bed 2"
 #Details on how to use PLINK2 with description of flags can be found in https://www.cog-genomics.org/plink/2.0/
 
 
-#### Transform PLINK files to PLINK 2 format (.pgen and .pvar)
+#### Transform PLINK 1 files to PLINK 2 format 
 
 plink2 --bfile < PLINK1 file name without extension (.bed/.bim/.fam) > --make-pgen -out < PLINK2 file name without extension (.pgen/.psam/.pvar) >
 
