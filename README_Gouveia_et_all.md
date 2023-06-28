@@ -1,4 +1,4 @@
-# Projection analysis and association analysis accounting for local ancestry 
+# Projection analysis (ADMIXTURE and PCA), and association analysis accounting for local ancestry 
 ## Projection analysis using Eigensoft
 
 * Eigensoft details at https://github.com/chrchang/eigensoft/blob/master/POPGEN/README
